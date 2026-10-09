@@ -23,3 +23,5 @@ npm run dev
 
 ## Figma Link
 - https://www.figma.com/design/30T93kMIKhOA9KB1nm8jxH/Untitled?node-id=1-2&t=2H7Jcv2oJ25maakl-1
+
+- insparation for design from dribbble: https://dribbble.com/shots/27472320-Weather-App-UI-Design-Clean-Forecast-Experience
