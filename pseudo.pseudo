@@ -1,0 +1,123 @@
+PSEUDOCODE: WEATHER APP INITIALIZATION AND USER ACTIONS
+
+CONSTANT DEFAULT_LOCATION = "Johannesburg"
+CONSTANT MAX_SAVED_LOCATIONS = 5
+
+START
+    savedTheme <- READ "theme" FROM LOCAL STORAGE
+    IF savedTheme is empty THEN
+        savedTheme <- "light"
+    END IF
+
+    savedUnits <- READ "units" FROM LOCAL STORAGE
+    IF savedUnits is empty THEN
+        savedUnits <- "celsius"
+    END IF
+
+    savedLocations <- READ "locations" FROM LOCAL STORAGE
+    IF savedLocations is empty OR cannot be parsed THEN
+        savedLocations <- empty list
+    END IF
+
+    state <- {
+        selectedLocation: empty,
+        currentWeather: empty,
+        forecast: empty,
+        savedLocations: savedLocations,
+        theme: savedTheme,
+        units: savedUnits,
+        loading: false,
+        error: empty,
+        activeView: "daily"
+    }
+
+    LOAD_APP
+END
+
+PROCEDURE LOAD_APP
+    APPLY state.theme TO THE APP
+    APPLY state.units TO WEATHER DISPLAY
+
+    IF browser supports geolocation THEN
+        REQUEST_USER_LOCATION
+    ELSE
+        LOAD_WEATHER_FOR_LOCATION(DEFAULT_LOCATION)
+    END IF
+END PROCEDURE
+
+PROCEDURE REQUEST_USER_LOCATION
+    REQUEST the user's current coordinates from the browser
+
+    IF permission is granted and coordinates are received THEN
+        latitude <- received latitude
+        longitude <- received longitude
+        location <- LOOK UP LOCATION using latitude and longitude
+        LOAD_WEATHER_FOR_LOCATION(location)
+    ELSE
+        LOAD_WEATHER_FOR_LOCATION(DEFAULT_LOCATION)
+    END IF
+END PROCEDURE
+
+PROCEDURE LOAD_WEATHER_FOR_LOCATION(location)
+    SET state.loading TO true
+    CLEAR state.error
+
+    TRY
+        weatherData <- REQUEST weather data for location
+        SET state.currentWeather TO weatherData.current
+        SET state.forecast TO weatherData.forecast
+        SET state.selectedLocation TO location
+        ADD_RECENT_LOCATION(location)
+        SAVE weatherData in the local weather cache for location
+    IF request fails THEN
+        SET state.error TO "Unable to fetch weather data. Please try again."
+        cachedData <- GET cached weather data for location
+        IF cachedData exists THEN
+            SET state.currentWeather TO cachedData.current
+            SET state.forecast TO cachedData.forecast
+        END IF
+    FINALLY
+        SET state.loading TO false
+    END TRY
+END PROCEDURE
+
+PROCEDURE SEARCH_LOCATION(query)
+    cleanedQuery <- REMOVE leading and trailing spaces from query
+
+    IF cleanedQuery is empty THEN
+        SET state.error TO "Please enter a city name."
+        STOP
+    END IF
+
+    LOAD_WEATHER_FOR_LOCATION(cleanedQuery)
+END PROCEDURE
+
+PROCEDURE TOGGLE_THEME
+    IF state.theme is "light" THEN
+        SET state.theme TO "dark"
+    ELSE
+        SET state.theme TO "light"
+    END IF
+
+    SAVE state.theme as "theme" in local storage
+    APPLY state.theme TO THE APP
+END PROCEDURE
+
+PROCEDURE TOGGLE_UNITS
+    IF state.units is "celsius" THEN
+        SET state.units TO "fahrenheit"
+    ELSE
+        SET state.units TO "celsius"
+    END IF
+
+    SAVE state.units as "units" in local storage
+    REDISPLAY weather values using state.units
+END PROCEDURE
+
+PROCEDURE ADD_RECENT_LOCATION(location)
+    IF state.savedLocations does not already contain a location with the same name THEN
+        ADD location to the beginning of state.savedLocations
+        KEEP only the first MAX_SAVED_LOCATIONS entries
+        SAVE state.savedLocations as "locations" in local storage
+    END IF
+END PROCEDURE
