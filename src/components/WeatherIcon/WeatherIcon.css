@@ -1,0 +1,27 @@
+.weather-icon {
+    flex-shrink: 0;
+}
+
+.weather-icon__sun circle,
+.weather-icon__bolt {
+    fill: var(--sun);
+}
+
+.weather-icon__sun line {
+    stroke: var(--sun);
+    stroke-width: 2.5;
+    stroke-linecap: round;
+}
+
+.weather-icon__cloud {
+    fill: var(--cloud-fill);
+    stroke: var(--cloud-stroke);
+    stroke-width: 1.6;
+    stroke-linejoin: round;
+}
+
+.weather-icon__rain line {
+    stroke: var(--accent);
+    stroke-width: 2.4;
+    stroke-linecap: round;
+}
