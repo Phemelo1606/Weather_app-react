@@ -1,0 +1,18 @@
+.card {
+    padding: 20px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+    box-shadow: var(--shadow);
+}
+
+.card--tinted {
+    background: var(--surface-tint);
+    border-color: transparent;
+}
+
+@media (max-width: 480px) {
+    .card {
+        padding: 16px;
+    }
+}

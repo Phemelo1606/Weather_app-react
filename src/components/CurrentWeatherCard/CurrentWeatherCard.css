@@ -1,0 +1,91 @@
+.current-card {
+    padding: 24px;
+}
+
+.current-card__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.current-card__place {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.current-card__meta {
+    margin-top: 2px;
+    color: var(--text-muted);
+    font-size: 12px;
+}
+
+.current-card__body {
+    display: flex;
+    align-items: center;
+    gap: 48px;
+    margin-top: 12px;
+}
+
+.current-card__reading {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.current-card__temp {
+    font-size: 64px;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.02em;
+}
+
+.current-card__summary {
+    display: grid;
+    gap: 4px;
+}
+
+.current-card__condition {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.current-card__range {
+    color: var(--text-muted);
+    font-size: 12px;
+}
+
+.current-card__tip {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--accent-strong);
+    font-size: 12px;
+}
+
+@media (max-width: 768px) {
+    .current-card__body {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .current-card {
+        padding: 16px;
+    }
+
+    .current-card__temp {
+        font-size: 48px;
+    }
+}
+
+@media (max-width: 320px) {
+    .current-card__reading {
+        flex-wrap: wrap;
+    }
+}
