@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import type { DailyPoint, HourlyPoint, Units } from '../../types/weather';
 import { formatTemp } from '../../utils/units';
-import Card from '../Card/Card';
+import Card from '../Card/card';
 import ForecastItem from '../ForecastItem/ForecastItem';
-import SegmentedControl from '../SegmentedControl/SegmentedControl';
+
 import './ForecastPanel.css';
 
 type ViewMode = 'hourly' | 'daily';
@@ -30,7 +30,7 @@ export default function ForecastPanel({ hourly, daily, units }: ForecastPanelPro
           <h2 className="forecast-panel__title">{isHourly ? 'The next 24 hours' : 'The next 7 days'}</h2>
           <p className="forecast-panel__subtitle">{isHourly ? 'Your forecast, hour by hour.' : 'Your forecast, day by day.'}</p>
         </div>
-        <SegmentedControl options={VIEW_OPTIONS} value={view} onChange={setView} ariaLabel="Forecast view" />
+
       </div>
 
       <ul className="forecast-panel__list">

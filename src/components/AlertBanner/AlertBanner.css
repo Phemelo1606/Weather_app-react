@@ -1,0 +1,40 @@
+.alert-banner {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px 14px;
+    border: 1px solid var(--warning-border);
+    border-radius: var(--radius-md);
+    background: var(--warning-bg);
+    color: var(--warning-text);
+}
+
+.alert-banner__icon {
+    margin-top: 2px;
+    flex-shrink: 0;
+}
+
+.alert-banner__text {
+    flex: 1;
+    min-width: 0;
+}
+
+.alert-banner__title {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.alert-banner__message {
+    font-size: 12px;
+}
+
+.alert-banner .btn--ghost {
+    color: inherit;
+    width: 28px;
+    height: 28px;
+}
+
+.alert-banner .btn--ghost:hover:not(:disabled) {
+    background: rgba(0, 0, 0, 0.06);
+    color: inherit;
+}
