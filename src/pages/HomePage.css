@@ -1,0 +1,14 @@
+.home-page__details {
+    display: grid;
+    gap: 12px;
+}
+
+.home-page__heading {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.home-page__footnote {
+    color: var(--text-muted);
+    font-size: 11px;
+}

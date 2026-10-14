@@ -1,0 +1,36 @@
+.segmented {
+    display: inline-flex;
+    padding: 3px;
+    gap: 2px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--surface-muted);
+}
+
+.segmented__option {
+    padding: 5px 12px;
+    border: 0;
+    border-radius: 6px;
+    background: transparent;
+    color: var(--text-muted);
+    font: 500 12px var(--font);
+    cursor: pointer;
+    transition: background-color 0.15s, color 0.15s;
+}
+
+.segmented__option:hover {
+    color: var(--text);
+    background: var(--accent-soft);
+}
+
+.segmented__option:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+}
+
+.segmented__option--active,
+.segmented__option--active:hover {
+    background: var(--surface);
+    color: var(--accent-strong);
+    box-shadow: var(--shadow);
+}
