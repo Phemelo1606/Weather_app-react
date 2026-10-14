@@ -117,6 +117,8 @@ Reusable components include the search bar, header and navigation, current weath
 - Figma: https://www.figma.com/design/30T93kMIKhOA9KB1nm8jxH/Untitled?node-id=1-2&t=2H7Jcv2oJ25maakl-1
 - Inspiration: [Weather App UI Design on Dribbble](https://dribbble.com/shots/27472320-Weather-App-UI-Design-Clean-Forecast-Experience)
 
+## Host link
+
 ## Troubleshooting
 
 - **Blank page:** open the browser console (F12) and read the first red error.
