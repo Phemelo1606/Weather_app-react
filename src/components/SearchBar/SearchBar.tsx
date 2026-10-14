@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from 'react';
+import { useEffect, useRef, useState, type FormEvent } from 'react';
 import { Search } from 'lucide-react';
 import './SearchBar.css';
 
@@ -10,12 +10,18 @@ interface SearchBarProps {
 
 export default function SearchBar({ onSearch, placeholder = 'Search city or postcode', className = '' }: SearchBarProps) {
   const [query, setQuery] = useState('');
+  const debounceTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => () => {
+    if (debounceTimer.current) clearTimeout(debounceTimer.current);
+  }, []);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const trimmed = query.trim();
     if (!trimmed) return;
-    onSearch(trimmed);
+    if (debounceTimer.current) clearTimeout(debounceTimer.current);
+    debounceTimer.current = setTimeout(() => onSearch(trimmed), 300);
     setQuery('');
   };
 

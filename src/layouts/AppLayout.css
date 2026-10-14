@@ -1,9 +1,14 @@
 .app-layout__main {
     display: grid;
+    grid-template-columns: minmax(0, 1fr);
     gap: 20px;
     max-width: 1200px;
     margin: 0 auto;
     padding: 28px 24px 48px;
+}
+
+.app-layout__main > * {
+    min-width: 0;
 }
 
 @media (max-width: 1024px) {

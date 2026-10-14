@@ -14,5 +14,7 @@ export { default as Logo } from './Logo/Logo';
 export { default as NavTabs } from './NavTabs/NavTabs';
 export { default as PageHeading } from './PageHeading/PageHeading';
 export { default as SearchBar } from './SearchBar/SearchBar';
+export { default as SegmentedControl } from './SegmentedControl/SegmentedControl';
+export { default as SettingRow } from './SettingRow/SettingRow';
 export { Toast, ToastContainer } from './Toast/Toast';
 export { default as WeatherIcon } from './WeatherIcon/WeatherIcon';

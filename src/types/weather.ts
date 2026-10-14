@@ -1,5 +1,5 @@
 export type Units = 'metric' | 'imperial';
-export type Theme = 'light' | 'dark' | 'system';
+export type Theme = 'light' | 'dark';
 export type Condition = 'sunny' | 'partly-cloudy' | 'cloudy' | 'rain' | 'storm';
 
 export interface LocationInfo {
@@ -61,3 +61,5 @@ export interface WeatherData {
   daily: DailyPoint[];
   alerts: WeatherAlert[];
 }
+
+export interface SavedLocation { id: string; locationId: string; location: LocationInfo; }

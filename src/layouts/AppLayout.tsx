@@ -1,26 +1,27 @@
 import { useState } from 'react';
 import { Outlet, useNavigate } from 'react-router';
-import { findNearestLocation, searchLocations } from '../api/mockWeatherApi';
-import  Header  from '../components/Header/Header';
-import { useAppContext } from '../context/AppContext';
+import { findNearestLocation, searchLocations } from '../api/weatherService';
+import Header from '../components/Header/Header';
 import { useToast } from '../context/ToastContext';
 import './AppLayout.css';
 
 export default function AppLayout() {
   const navigate = useNavigate();
   const { showToast } = useToast();
-  const { setActiveLocationId } = useAppContext();
   const [isLocating, setIsLocating] = useState(false);
 
   const handleSearch = async (query: string) => {
-    const [match] = await searchLocations(query);
-    if (!match) {
-      showToast(`No match for "${query}". Check the spelling or try a nearby city.`, 'error');
-      return;
+    try {
+      const [match] = await searchLocations(query);
+      if (!match) {
+        showToast(`No match for "${query}". Check the spelling or try a nearby city.`, 'error');
+        return;
+      }
+      showToast(`Showing weather for ${match.name}.`, 'success');
+      navigate(`/?loc=${encodeURIComponent(match.id)}`);
+    } catch (error) {
+      showToast(error instanceof Error ? error.message : 'Could not search locations.', 'error');
     }
-    setActiveLocationId(match.id);
-    showToast(`Showing weather for ${match.name}.`, 'success');
-    navigate('/');
   };
 
   const handleUseLocation = () => {
@@ -31,11 +32,15 @@ export default function AppLayout() {
     setIsLocating(true);
     navigator.geolocation.getCurrentPosition(
       async ({ coords }) => {
-        const place = await findNearestLocation(coords.latitude, coords.longitude);
-        setActiveLocationId(place.id);
-        setIsLocating(false);
-        showToast(`Showing weather for ${place.name}.`, 'success');
-        navigate('/');
+        try {
+          const place = await findNearestLocation(coords.latitude, coords.longitude);
+          showToast(`Showing weather for ${place.name}.`, 'success');
+          navigate(`/?loc=${encodeURIComponent(place.id)}`);
+        } catch (error) {
+          showToast(error instanceof Error ? error.message : 'Could not find a nearby location.', 'error');
+        } finally {
+          setIsLocating(false);
+        }
       },
       () => {
         setIsLocating(false);
