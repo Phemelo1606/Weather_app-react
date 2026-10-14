@@ -119,6 +119,8 @@ Reusable components include the search bar, header and navigation, current weath
 
 ## Host link
 
+- https://weatherapp-react-sand.vercel.app/
+
 ## Troubleshooting
 
 - **Blank page:** open the browser console (F12) and read the first red error.
